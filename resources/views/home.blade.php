@@ -2,11 +2,7 @@
 
 @section('content')
 
-<div class="d-flex justify-content-end my-2">
-<a href="{{route('discussions.create')}}"> <button class="btn btn-info">
-    Add Discussion
-</button></a>
-</div>
+
 <div class="card">
     <div class="card-header">Dashboard</div>
     

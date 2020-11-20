@@ -16,7 +16,7 @@ class CreateDiscussionsTable extends Migration
         Schema::create('discussions', function (Blueprint $table) {
        $table->bigIncrements('id');
        $table->integer('user_id');
-       $table->string('title');
+       $table->string('title')->unique();
        $table->text('content');
        $table->string('slug');
        $table->integer('channel_id');
