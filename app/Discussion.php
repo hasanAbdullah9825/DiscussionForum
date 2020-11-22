@@ -8,7 +8,7 @@ use App\User;
 class Discussion extends Model
 {
     
-    protected $fillable=['title','content','slug','user_id','channel_id']; 
+
 
     public function author(){
 
@@ -19,5 +19,6 @@ class Discussion extends Model
     {
         return 'slug';
     }
+    
     
 }

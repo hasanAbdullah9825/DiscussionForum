@@ -61,7 +61,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                 document.getElementById('logout-form').submit();">
+                                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -76,21 +76,27 @@
                 </div>
             </div>
         </nav>
-
-        @auth
+        @if (!in_array(request()->path(), ['login', 'register']))
             <main class="py-4">
                 <div class="container">
                     <div class="row">
                         <div class="com-md-4">
-                            
 
-                                <a href="{{ route('discussions.create') }}"> <button class="btn btn-info my-2  " style="width:100%">
-                                        Add New Discussion
-                                    </button></a>
-                       
+                            @auth
+                            <a href="{{ route('discussions.create') }}"> <button class="btn btn-info my-2  "
+                                style="width:100%">
+                                Add New Discussion
+                            </button></a>
+                            @else
+                            <a href="{{ route('login') }}"> <button class="btn btn-info my-2  "
+                                style="width:100%">
+                                Sign in to Discussion
+                            </button></a>
+                            @endauth
+
                             <div class="card">
                                 <div class="card-header">
-                                   Channels
+                                    Channels
                                 </div>
                                 <div class="card-body">
                                     <ul class="list-group">
@@ -111,11 +117,18 @@
                 </div>
 
             </main>
+
         @else
-            <main class="py-4">
+            <div class="py-4 ">
+
+
                 @yield('content')
-            </main>
-        @endauth
+
+
+
+            </div>
+        @endif
+
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

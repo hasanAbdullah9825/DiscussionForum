@@ -1,7 +1,9 @@
 <?php
 
 namespace App;
+
 use App\Discussion;
+use App\Reply;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -38,7 +40,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function discussions(){
+    public function discussions()
+    {
         return $this->hasMany(Discussion::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
     }
 }
