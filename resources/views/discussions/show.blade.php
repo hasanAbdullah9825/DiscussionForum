@@ -10,13 +10,28 @@
             {!! $discussion->content !!}
         </div>
     </div>
-    <div class="card my-2">
+    <div  class="card my-2">
         @if (session()->has('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
             </div>
 
         @endif
+
+@foreach($discussion->replies()->paginate(3) as $reply )
+<div class="card" my-2>
+    <div class="card-header">
+    <img src="{{Gravatar::src($reply->owner->email)}}" alt="" style="border-radius:50%" height="40px" width="40px" >
+    <span style="">{{$reply->owner->name}}</span>
+    </div>
+    <div class="card-body">
+        {!!$reply->content!!}
+    </div>
+</div>
+    
+@endforeach
+{{$discussion->replies()->paginate(3)->links()}}
+
         <div class="card-header">
             Add a reply
         </div>

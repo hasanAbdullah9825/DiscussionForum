@@ -43,6 +43,9 @@ class RepliesController extends Controller
             'content'=>$request->content
          ]);
 
+         session()->flash('success','Reply inserted successfully');
+         return redirect()->back();
+
 
         
 
