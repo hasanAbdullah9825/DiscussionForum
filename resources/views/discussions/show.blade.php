@@ -4,13 +4,40 @@
 
 
     <div class="card">
-        <div class="card-header"><strong>{{ $discussion->title }}</strong></div>
+
+        @include('partial.discussion-header')
+        <div class="text-center">
+            <strong>{{ $discussion->title }}</strong>
+        </div>
+
 
         <div class="card-body">
             {!! $discussion->content !!}
         </div>
+        @if ($discussion->bestReply)
+            <div class="card bg-success">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <img src="{{ Gravatar::src($discussion->bestReply->owner->email) }}" height="40px" width="40[x]"
+                                style="border-radius: 50%;" alt="">
+                            <span><strong>{{ $discussion->bestReply->owner->name }}</strong></span>
+                        </div>
+                        <div>
+                            <strong> Best Reply</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {!!$discussion->bestReply->content!!}
+                </div>
+            </div>
+
+        @endif
+
     </div>
-    <div  class="card my-2">
+
+    <div class="card my-2">
         @if (session()->has('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
@@ -18,19 +45,48 @@
 
         @endif
 
-@foreach($discussion->replies()->paginate(3) as $reply )
-<div class="card" my-2>
-    <div class="card-header">
-    <img src="{{Gravatar::src($reply->owner->email)}}" alt="" style="border-radius:50%" height="40px" width="40px" >
-    <span style="">{{$reply->owner->name}}</span>
-    </div>
-    <div class="card-body">
-        {!!$reply->content!!}
-    </div>
-</div>
-    
-@endforeach
-{{$discussion->replies()->paginate(3)->links()}}
+        @foreach ($discussion->replies()->paginate(3) as $reply)
+            <div class="card" my-2>
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="">
+                            <img src="{{ Gravatar::src($reply->owner->email) }}" height="40px" width="40[x]"
+                                style="border-radius: 50%;" alt="">
+                            <span>{{ $reply->owner->name }}</span>
+                        </div>
+
+
+                        @auth
+                            @if (auth()->user()->id == $discussion->user_id)
+                                <div>
+
+
+                                    <form
+                                        action="{{ route('discussion.best-reply', ['discussion' => $discussion->slug, 'best-reply' => $reply->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        <button class="btn btn-info btn-sm" type="submit">
+                                            Mark as Best Reply
+                                        </button>
+                                    </form>
+                                </div>
+                            @endif
+
+
+                        @endauth
+
+
+
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    {!! $reply->content !!}
+                </div>
+            </div>
+
+        @endforeach
+        {{ $discussion->replies()->paginate(3)->links() }}
 
         <div class="card-header">
             Add a reply
