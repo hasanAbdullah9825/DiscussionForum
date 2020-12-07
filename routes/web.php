@@ -23,3 +23,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('discussions', 'DiscussionsController');
 Route::resource('discussions/{discussion}/replies', 'RepliesController');
 Route::post('discussions/{discussion}/replyes/{reply}/best_reply', 'DiscussionsController@reply')->name('discussion.best-reply');
+Route::get('users/notifications','UsersController@notifications')->name('all-notifications');
