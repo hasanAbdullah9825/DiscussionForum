@@ -58,8 +58,7 @@ class NewReplyAdded extends Notification
     public function toArray($notifiable)
     {
         return [
-            $this->disc
-            ussion
+            $this->discussion
         ];
     }
 }
