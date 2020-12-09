@@ -17,39 +17,28 @@
         <ul class="list-group">
            @foreach($notifications as $notification)
                <li class="list-group-item">
-                  @if($notification->type=='App\Notifications\NewReplyAdded')
                  
-                  <div class="justify-content-between">
-                      <div class="div">
-                        @if($notification->type=='App\Notifications\NewReplyAdded')
                  
-                        A new reply was added to your discussion
-                        <strong>{{ $notification->data['discussion']['title'] }}</strong>
-                        
-                       
-     
-                        @endif
-                        @if($notification->type=='App\Notifications\ReplyMarkedAsBestReply')
-                      Your Reply  to <strong>{{$notification->data['discussion']['title']}}</strong> is marked as best Reply
-      
-                        <a href="{{ route('discussions.show', $notification->data['discussion']['title']) }}" class="btn btn-sm btn-success float-right">
-                            View Discussion
-                        </a>
-                        @endif
-                      </div>
-                      <div class="div">
-
-                      </div>
-                  </div>
+                   @if($notification->type=='App\Notifications\NewReplyAdded')
+                 
+                  A new reply was added to your discussion
+                  <strong>{{ $notification->data['discussion']['title'] }}</strong>
+                  
+                  <a href="{{ route('discussions.show', $notification->data['discussion']['slug']) }}" class="btn btn-sm btn-success float-right">
+                      View Discussion
+                  </a>
                       
                   @endif
                   @if($notification->type=='App\Notifications\ReplyMarkedAsBestReply')
                 Your Reply  to <strong>{{$notification->data['discussion']['title']}}</strong> is marked as best Reply
 
-                  <a href="{{ route('discussions.show', $notification->data['discussion']['title']) }}" class="btn btn-sm btn-success float-right">
+                  <a href="{{ route('discussions.show', $notification->data['discussion']['slug']) }}" class="btn btn-sm btn-success float-right">
                       View Discussion
                   </a>
                   @endif
+                      
+             
+                  
 
                </li>
            @endforeach
