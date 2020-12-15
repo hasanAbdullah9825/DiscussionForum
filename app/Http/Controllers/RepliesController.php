@@ -38,6 +38,9 @@ class RepliesController extends Controller
      */
     public function store(CreateReplyRequest $request, Discussion $discussion)
     {
+
+
+
         auth()->user()->replies()->create([
 
             'discussion_id' => $discussion->id,

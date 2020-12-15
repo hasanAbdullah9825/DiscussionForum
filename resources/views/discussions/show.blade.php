@@ -65,7 +65,7 @@
                                         action="{{ route('discussion.best-reply', ['discussion' => $discussion->slug, 'best-reply' => $reply->id]) }}"
                                         method="POST">
                                         @csrf
-                                        <button class="btn btn-info btn-sm" type="submit">
+          <button class="btn btn-info btn-sm" type="submit">
                                             Mark as Best Reply
                                         </button>
                                     </form>

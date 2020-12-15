@@ -33,15 +33,24 @@ class Discussion extends Model
     {
 
         $this->update(['reply_id' => $reply->id]);
-        
+
 
         $reply->owner->notify(new ReplyMarkedAsBestReply($reply->discussion));
-
-
     }
 
     public function bestReply()
     {
-        return $this->belongsTo(Reply::class,'reply_id');
+        return $this->belongsTo(Reply::class, 'reply_id');
+    }
+
+    public function scopefilterByChannels($builder)
+    {
+
+        if (request()->query('channel')) {
+            $channel = Channel::where('slug', request()->query('channel'))->first();
+
+            return $builder->where('channel_id', $channel->id);
+        }
+        return $builder;
     }
 }

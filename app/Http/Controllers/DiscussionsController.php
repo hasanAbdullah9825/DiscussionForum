@@ -21,7 +21,7 @@ class DiscussionsController extends Controller
     }
     public function index()
     {
-        return view('discussions.index')->with('discussions', Discussion::paginate(5));
+        return view('discussions.index')->with('discussions', Discussion::filterByChannels()->paginate(5));
     }
 
     /**
@@ -42,7 +42,6 @@ class DiscussionsController extends Controller
      */
     public function store(CreateDiscussionRequest $request)
     {
-
 
 
 
@@ -68,10 +67,9 @@ class DiscussionsController extends Controller
      */
     public function show(Discussion $discussion)
     {
-    
-    
-        return view('discussions.show')->with('discussion',$discussion);
-    
+
+
+        return view('discussions.show')->with('discussion', $discussion);
     }
 
     /**
@@ -108,12 +106,11 @@ class DiscussionsController extends Controller
         //
     }
 
-    public function reply(Discussion $discussion,Reply $reply){
-       $discussion->MarkAsBestReply($reply);
-      //dd($reply->discussion);
-       session()->flash('success','Marked as best reply');
-       return redirect()->back();
-
-
+    public function reply(Discussion $discussion, Reply $reply)
+    {
+        $discussion->MarkAsBestReply($reply);
+        //dd($reply->discussion);
+        session()->flash('success', 'Marked as best reply');
+        return redirect()->back();
     }
 }
