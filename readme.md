@@ -1,5 +1,5 @@
-# Pig-Game-Using-JS
-Pig is a simple dice game first described in print by John Scarne in 1945. Players take turns to roll a single die as many times as they wish, adding all roll results to a running total, but losing their gained score for the turn if they roll a 1.The first scorer of 100  is the winner.
+# Discussion Forum
+This is a Discussion Forum. Where the user can make a discussion with different channels. And others can reply to those Discussions. Owner of the discussion can mark the best reply and owner of reply will get an email notification that his reply is marked as best reply. I have also used email verifications at the time of user registration. This is one of my practice projects.
 
 
 ![](image)
